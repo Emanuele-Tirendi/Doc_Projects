@@ -5,6 +5,7 @@
 * [Rat um Rad: Protocoll](rat_um_rad/Rat_um_Rad_Protocoll.pdf)
 * [EasterEggHunt: Pflichtenheft](easter_egg_hunt/EasterEggHunt_Pflichtenheft.md)
 * [EasterEggHunt: Technische Dokumentation](easter_egg_hunt/EasterEggHunt_TechnischeDokumentation.md)
+
 **Manuals and Exercise sheets**
 * [Rat um Rad: Manual](rat_um_rad/Rat_um_Rad_Manual.pdf)
 * [C++ Exercise sheet](programming_languages/cs109-e1.pdf)
