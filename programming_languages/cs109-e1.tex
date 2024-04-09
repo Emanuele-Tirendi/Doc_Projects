@@ -1,0 +1,489 @@
+%main document
+\newcommand{\pathtotemplate}{../../template/}
+\newcommand{\coursepart}{C++}
+%included document
+\documentclass[12pt,a4paper]{scrartcl}
+
+\usepackage[german,english]{babel}
+\usepackage{epsf,epsfig,epic,eepic,graphics,latexsym}
+\usepackage[latin1]{inputenc}
+\usepackage{graphicx,float}
+\usepackage{tabularx}
+\usepackage{amsmath,amsthm,amssymb,amsfonts,nicefrac}
+\usepackage{enumerate,enumitem}
+
+\usepackage{\pathtotemplate unibas-teaching}
+\usepackage{fullpage}
+\usepackage{comment}
+\usepackage{alltt}           % verbatim-"Ersatz"
+\usepackage{\pathtotemplate sql}
+
+%\usepackage{skak} % Chess package used for some practical exercise.
+
+\usepackage{color}
+
+\usepackage{multicol}
+\usepackage{listings}
+
+\usepackage{moreverb}
+\usepackage{textcomp}
+
+
+% Zum Einbetten von Java-- und scheme--Code
+\usepackage{\pathtotemplate java}
+%\usepackage{scheme}
+
+% Lese Definitionen f"ur \TeX, \LaTeX etc.
+\usepackage{texnames} % f"ur "Ubungsbl"atter eigentlich nicht n"otig
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\excludecomment{hidden}
+
+%
+\newcommand{\field}[1]{\mathbf{#1}}%\mathds
+\newcommand{\RR}{\field{R}}
+\newcommand{\NN}{\field{N}}
+%
+\newcommand{\e}{{\rm{e}}}
+
+\newcommand{\email}[1]{\href{mailto:#1}{\textbf{#1}}}
+\newcommand{\web}[1]{\href{#1}{\textbf{#1}}}
+
+
+\newcommand{\tutormailone}{\email{xxxxxxxxx.xxxxxxxxxxx@stud.unibas.ch}}
+\newcommand{\tutormailtwo}{\email{emanuele.tirendi@unibas.ch}}
+\newcommand{\tutormailthree}
+{\email{xxxx.xxxxxxxx@unibas.ch}}
+
+%%%%%%%%%Seitenformat%%%%%%%%%%%%%%%
+%    \oddsidemargin  -1.5 cm
+%    \evensidemargin -1.5 cm
+%    \textwidth 19 cm
+%    \textheight 25 cm
+%    \topmargin -2.5 cm
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\course{Programming Paradigms -- \coursepart  \hfill FS 2024}
+\def\courseshort{cs109}
+\def\emailTM{xxxxxxxx.xxxxxxx@unibas.ch}
+
+\newcommand{\ExCondMandComm}{
+
+	\begin{quote}\sffamily{
+
+		\textbf{Upload your answers} to the questions \textbf{and source code} on Adam before the deadline. 
+		
+		\textbf{Text :} For answers to questions, observations and explanations, we suggest writing them in LaTeX. Please hand-in your answers as a \textbf{single PDF} file (independent of what tools you use, LaTeX, Markdown etc.). 
+			
+		\textbf{Source-Code :} For coding exercises, the source-code must be provided and has to be \textbf{commented in detail} (e.g. how it works, how it is executed, comments on conditions to be satisfied). 
+		
+		\textbf{Upload :} Please archive multiple files into a \textbf{single compressed zip-file}. If you upload an updated version of your solutions, the file name should contain a clear and intuitive versioning number. Only the latest version will be graded.
+		
+		\textbf{Requisit :} In order to take the final exam, you must score at least $\nicefrac{2}{3}$ of all available points throughout the mandatory exercises.
+		
+		\textbf{Modalities of work:} The exercise can be completed in groups of at most 2 people. Do not forget to provide the full name of all group members together with the submitted solution.
+		
+	}\end{quote}
+	
+}
+
+
+% PDF-Metadaten und Linkfarbe hier w?hlen
+\usepackage[pdftitle={},
+			pdfauthor={\emailTM},
+			pdfsubject={\course},
+			linkcolor=black,
+			urlcolor=black,
+			citecolor=black,
+			filecolor=black,
+			colorlinks=true]{hyperref} % for automatically linked TOC entries; if disturbs printout -- better comment out!
+
+\begin{document}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	\begin{UNIBASKopfSW}
+		\small \\
+		\small \sffamily{Lecturer: Xxxxxxxx Xxxxxxx~-~\email{\emailTM}}\\
+		\small \sffamily{Tutors: }\\
+		\small \hspace{10pt}
+		\small \sffamily{Xxxxxxxxx Xxxxxxxxxxx~-
+        ~\tutormailone}\\
+		\small \hspace{10pt}
+		\small \sffamily{Emanuele Tirendi~-
+        ~\tutormailtwo}\\
+		\small \hspace{10pt}
+		\small \sffamily{Xxxx Xxxxxxxx~-~\tutormailthree}\\
+	\end{UNIBASKopfSW}
+%\selectlanguage{german} for switching to German
+
+%\musterloesungsmodus %TODO: uncomment this when you want to give a solution to the students between \begin{lsg}...\end{lsg}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\homeworknum{1}
+
+\uebungskopf{\course}%
+  {Exercise \homeworknum}{Due: 21.04.2024 23:55:00}
+
+\protect\def\mailsubject{\courseshort: Uebung \homeworknum}
+
+\ExCondMandComm
+
+\vspace*{0.5cm}
+
+\definecolor{grey}{rgb}{0.6,0.65,0.61}
+
+\lstset{ % General setup for the package
+	language=C++
+	,basicstyle=\small\sffamily
+	,numbers=left
+    ,numberstyle=\tiny
+	,frame=tblr
+	,tabsize=4
+	,columns=fixed
+	,showstringspaces=false
+%	,showtabs=false
+%	,keepspaces
+	,commentstyle=\color{grey}
+	,keywordstyle=\color{blue}\textbf
+	,stringstyle=\textit
+%	,operatorstyle=\color{red}
+}
+
+\setlength{\abovedisplayskip}{-4mm}
+\setlength{\belowdisplayskip}{-4mm}
+
+%******************************************************************************************
+
+\newpage
+
+\begin{aufgabe}[5]{Compilation Exercises}
+
+	The task of this exercise is to analyse the following code snippets. Answer which ones are correct and which ones are not correct i.e. which ones will produce compiler or linker errors/warnings. For the ones that are not correct, explain what the problem is and how to fix it.
+
+	\begin{enumerate}
+
+		\item
+		\begin{verbatim} double foo(double x) {}
+		\end{verbatim}
+
+		\item
+		\begin{verbatim} bool x; bool foo(bool y, bool z) { return x && z;} foo(x, x);
+		\end{verbatim}
+
+		\item
+		\begin{verbatim} int foo(int x) {return x;}
+		\end{verbatim}
+
+		\item
+		\begin{verbatim} typedef enum {int x, y, z;}a;
+		\end{verbatim}
+
+		\item
+		\begin{verbatim} int main(int argc, char** argv) {bool b = foo(3); return 0 }
+bool foo(int x) { return 0 && x;}
+		\end{verbatim}
+
+	\end{enumerate}
+
+\end{aufgabe}
+
+
+\newpage
+
+
+\begin{aufgabe}[7]{Error Search}
+
+	The files \texttt{lib.h} and \texttt{lib.cpp} could represent a library which provides as its functionality the structs \texttt{libstruct1} and \texttt{libstruct2} and the function \texttt{libfunctionality}. 
+
+	\paragraph*{main.cpp :}
+		\phantom{.}
+		\begin{lstlisting}[gobble=12] % 3 * tabsize
+			
+		    #include "lib.h"
+            #include <iostream>
+
+            using namespace std;
+
+            int main(int argc, char** argv) {
+                int z;
+                cin << z;
+                int i = libfunctionality(z, true);
+                cout << i;
+                return 0;
+            }
+			
+		\end{lstlisting}
+
+	\paragraph*{lib.h :}
+		\phantom{.}
+		\begin{lstlisting}[gobble=12] % 3 * tabsize
+			
+			#ifndef LIB_H
+            #define LIB_H
+            #include "lib.cpp"
+
+            namespace libnmsp {
+                struct libstruct2;
+
+                struct libstruct1 {
+                    int i;
+                    bool b;
+                    char c;
+                    libstruct2 l2;
+                }
+
+                struct libstruct2 {
+                    int j;
+                    libstruct1 l1;
+                }
+
+                int libfunctionality(int i, bool b);
+            }
+
+            #endif
+			
+		\end{lstlisting}
+		
+	\newpage
+		
+	\paragraph*{lib.cpp :}
+		\phantom{.}
+		\begin{lstlisting}[gobble=12] % 3 * tabsize
+			
+            #include "lib.h"
+
+            int libnmsp::libfunctionality(int i, bool b) {
+                int j = i + getNumber(b);
+                std::cout << j << "\n";
+            }
+
+            int getNumber(bool b) {
+                if (b == true) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+			
+		\end{lstlisting}
+
+
+		The program contains 7 compiler/linker errors/warnings. (It contains more than 7 if you count the same error multiple times.) Find the mistakes, explain why they are mistakes and how to fix them.
+
+\end{aufgabe}
+
+\newpage
+
+\begin{aufgabe}[13]{Arrays}
+
+    In this section, we want you to implement a header file (a file with the extension .h) and an implementation file (a file with the extension .cpp) for functionality that can be used for the manipulation of 0-terminated character strings.
+    \newline
+    \newline Note that you must not use any library for this task and should implement everything on your own.
+    \newline
+    \newline Implement everything exactly as described below, even the order of parameters the functions take or the name of the functions, files or namespaces. Doing otherwise may result in points being deducted.
+
+	\begin{teilaufgabe}[3]
+            We want you to write two files, \texttt{arraylib.h} and \texttt{arraylib.cpp}. In \texttt{arraylib.h} we want you to define your own namespace called \texttt{arr}. Declare within the namespace in \texttt{arraylib.h} and implement in \texttt{arraylib.cpp} the function \texttt{getLength} which has the following properties:
+            \begin{itemize}
+                \item It returns an integer value.
+                \item It takes a character pointer which is interpreted as a pointer to the first element of a 0-terminated character string.
+                \item If we have a character string \texttt{char c[] = "hello"} the character string \texttt{c} has length 6, because the last character is the character \texttt{'\textbackslash 0'} which is implicitly added by the compiler. We want \texttt{getLength} to return 5 as it is the length seen in the definition of this array.
+                \item If the length of the array (the number of the characters stored in the array without the terminating 0-character) is bigger than 20, getLength should return 0.
+            \end{itemize}
+        \end{teilaufgabe}
+
+        \begin{teilaufgabe}[6]
+            We want you to declare within the namespace \texttt{arr} in \texttt{arraylib.h} and implement in \texttt{arraylib.cpp} the function \texttt{replaceAllSubarrays} as follows:
+            \begin{itemize}
+                \item It returns a boolean value
+                \item It takes three character pointers in the following order:  \texttt{array}, \texttt{toBeReplaced} and \texttt{toReplaceWith}.
+                \item The three character pointers are interpreted as pointers to the first element of 0-terminated character arrays. If the length of \texttt{toReplaceWith} and \texttt{toBeReplaced} aren't the same, nothing happens and \texttt{replaceAllSubarrays} returns the boolean value \texttt{false}.
+                \item If the length of \texttt{array} is smaller or equal to the length of either \texttt{toReplaceWith} or \texttt{toBeReplaced}, nothing happens and \texttt{replaceAllSubarrays} returns the boolean \texttt{false}.
+                \item If the length of one of the three input arrays without the terminating 0-character is bigger than 20 or euqal to 0, nothing happens and \texttt{replaceAllSubarrays} returns the boolean value \texttt{false}.
+                \item Else, \texttt{replaceAllSubarrays} returns the value \texttt{true} and replaces every occurence of \texttt{toBeReplaced} in \texttt{array} by \texttt{toReplaceWith}. E.g. if we have \texttt{array="xhalloahallowww"}, \texttt{toBeReplaced="hallo"} and \texttt{toReplaceWith="world"} then after calling the function \texttt{replaceAllSubarrays} the array \texttt{array} should be equal to \texttt{"xworldaworldwww"}. Note that every character of \texttt{array} can be part of only one occurrence, namely the one starting at the smallest index. If we have for example \texttt{array="xxxabababxxx"}, \texttt{toBeReplaced="abab"} and \texttt{toReplaceWith="cdcd"}, then \texttt{replaceAllSubarrays} should change \texttt{array} correctly to \texttt{"xxxcdcdabxxx"} and \textbf{not} to \texttt{"xxxcdcdcdxxx"} or \texttt{"xxxabcdcdxxx"}.
+            \end{itemize}
+        \end{teilaufgabe}
+
+        \begin{teilaufgabe}[4]
+            We want you to declare in within the namespace \texttt{arr} in \texttt{arraylib.h} and implement in \texttt{arraylib.cpp} the function \texttt{intersection} as described below. We chose this name since the operations this function will perform on the arrays has similarities with the set operation of the same name.
+            \begin{itemize}
+                \item It returns a boolean value.
+                \item It takes three character pointers in the following order: \texttt{a}, \texttt{b} and \texttt{intersection}.
+                \item The three character pointers are interpreted as pointers to the first element of 0-terminated character arrays. If the length \texttt{a} and \texttt{b} aren't the same, nothing happens and the function \texttt{intersection} returns the value \texttt{false}.
+                \item If the length of the array \texttt{intersection} isn't double as big as the length of \texttt{a} or \texttt{b}, nothing happens and the function \texttt{intersection} returns the value \texttt{false}.
+                \item If the length of \texttt{a} and the length of \texttt{b} both without the terminating character are bigger than 10 or are equal to 0 and if the length of the array \texttt{intersection} without the terminating character is bigger than \texttt{20} or equal to 0, nothing happens and the function \texttt{intersection} returns the value \texttt{false}.
+                \item Let's denote with $s_{a|b}$ the string containing all the characters of \texttt{a} that are also present in \texttt{b} in the same order as they occur in \texttt{a}. That means, that if \texttt{a="hallo} and \texttt{b="olten"} then $s_{a|b}="llo"$ and $s_{b|a}="ol"$. Let further be $s_1^\frown s_2$ the concatenation of two strings, meaning if $s_1="hello"$ and $s_2="world"$, then $s_1^\frown s_2 = "helloworld$.
+                \newline
+                \newline If all other cases described above can be excluded, we want the function \texttt{intersection} to return true and to calculate $s_{a|b}^\frown s_{b|a}$ and store it in the array \texttt{intersection}. Since $s_{a|b}^\frown s_{b|a}$ usually has length smaller equal to the length of the array \texttt{intersection}, we want the function \texttt{intersection} to store $s_{a|b}^\frown s_{b|a}$ starting at index 0 of the array \texttt{intersection}. Every index of the array \texttt{intersection} that won't be overwritten by $s_{a|b}^\frown s_{b|a}$ should remain as it was before calling the function \texttt{intersection}.
+            \end{itemize}
+        \end{teilaufgabe}
+
+\end{aufgabe}
+
+\newpage
+
+\begin{aufgabe}[4]{Structs}
+    \begin{teilaufgabe}[2]
+        In this exercise, you'll develop a function \texttt{getInverse} that takes a $2x2$-matrix and returns the inverse of that matrix if it is defined. It returns a matrix with all entries equal to 0 if the inverse is not defined. If you find an explicit representation of the inverse of a $2x2$-Matrix on the internet, this task will be easy to solve. Please use structs to define a \texttt{matrix2D}. The method prototype could look like this:
+    \newline
+    \newline \texttt{matrix2D getInverse(matrix2D matrix);}
+    \newline
+    \newline Write a simple test in the main function that shows that your code works with both, an invertible matrix as well as a matrix that cannot be inverted. Not writing tests may result in points being deducted.
+    \end{teilaufgabe}
+    
+    \begin{teilaufgabe}[2]
+        In this exercise, you'll develop a function \texttt{solveEquation} that takes a $2x2$-matrix $M$ and a vector with two elements $v$ and returns the solution $x$ of the equation $Mx = v$. If the matrix is not invertible, the solution should have only 0 entries. If you use the function defined in a) this task will be easy to solve. Please use structs to define a \texttt{vector2D}. The method prototype could look like this:
+    \newline
+    \newline \texttt{vector2D solveEquation(matrix2D m, vector2d v);}
+    \newline
+    \newline Write a simple test in the main function that shows that your code works with both, an invertible matrix as well as a matrix that cannot be inverted. Not writing tests may result in points being deducted.
+    \end{teilaufgabe}
+\end{aufgabe}
+
+\newpage
+
+\begin{aufgabe}[8]{Enums, Structs and Unions}
+
+In this section we want you to get familiar with enums, structs and unions.
+
+	\begin{teilaufgabe}[2]
+Write a single enum containing an element for each of the following arithmetic operations: addition, subtraction, multiplication, division and an element for each of the following logical operations: and, or, nand, xor. Write also an union containing an integer and a boolean.
+	\end{teilaufgabe}
+
+	\begin{teilaufgabe}[4]
+Write a function which takes an enum element from the enum you have written in the previous exercise and two instances of the union you have written. Provide an example for every operand in your main function. Make sure to initialize the unions correctly so that the initialization matches the operations used.
+\begin{itemize}
+    \item If the enum provided is an arithmetic operation, the function should return a union containing an integer that is the result of the operation provided by the operation appied to the two integers of the union instances the function has got as arguments. E.g. if the unions name is \texttt{BoolInt} and we have \texttt{BoolInt a, c; a.i = 2; c.i = 3;} where \texttt{i} is the name of the integer in \texttt{BoolInt} and the function's name is \texttt{arithLogic}, then the following code should print a \texttt{5}: \texttt{BoolInt result = arithLogic(a, c, ADDITION); std::cout << result.i;}
+    \item If the enum provided is a logic operation, the function should return a union containing a boolean that is the result of the operation provided by the operation applied to the two booleans of the union instances the function has got as arguments. E.g. if the unions name is \texttt{BoolInt} and we have \texttt{BoolInt a, c; a.b = true; c.b = false;} where \texttt{b} is the name of the boolean in \texttt{BoolInt} and the function's name is \texttt{arithLogic}, then the following code should print a \texttt{0}: \texttt{BoolInt result = arithLogic(a, c, AND); std::cout << result.b;}. Note that booleans printed in std::cout are interpreted as numbers ($1=true$, $0=false$).
+\end{itemize}
+	\end{teilaufgabe}
+        \begin{teilaufgabe}[1]
+Would it be possible to change the function in a way that it takes two enums, one representing an arithmetic operation and one representing a logic operation, and return an instance of the union that has both the integer and the boolean as the correct result of the operations applied to the integers and booleans of the union instances taken as arguments? Explain your answer.
+	\end{teilaufgabe}
+        \begin{teilaufgabe}[1]
+Would it be possible with structs instead of unions? Explain your answer.
+        \end{teilaufgabe}
+ 
+\end{aufgabe}
+
+\newpage
+
+\begin{aufgabe}[5]{Pointers}
+
+In this exercise you are asked to analyze the following C++ code. What is its output?
+Explain what is happening in each line
+
+\textbf{Hint: } If the output is not uniquely determinable describe of what kind it would be.
+
+	\paragraph*{functionpointers.cpp}\phantom{.}
+	\begin{lstlisting}[gobble=8]
+		
+		#include <iostream>
+
+        int main() {
+                int a = 3;
+                int b = a*a;
+                int c[] = {1, 3, 5, 7};
+                int *p = &a, **q = &p, *o = &b;
+                *p = *o;
+                *c += *(c + 2);
+                *(c + 3) *= *c + 2;
+                *p = 4**&b***q;
+                (**q)++;
+                std::cout << p << " " << (*p + (*p - 8)) << std::endl;
+                *o *= 2;
+                std::cout << a << " " << p << " " << ((c + 1)[0]) << "\n";
+                std::cout << c[0] << " " << c[1] << " " << " " << c[3];
+        }
+	
+	\end{lstlisting}
+	
+\end{aufgabe}
+
+\newpage
+
+\begin{aufgabe}[8]{Function Pointers}
+
+	This exercise is about function pointers. In practice, you often need to define an interface, which can use different functions within an algorithm. Design an algorithm, which takes two integer arrays of size $3$ which serve as operands, a boolean array which serves as result of the operation, and an operator-function. This operator-function itself takes two integer arrays of size $3$ and a boolean array.
+
+	Implement two operator-functions:
+ \begin{itemize}
+     \item One that stores at index \texttt{i} of the boolean value the value \texttt{true} if the number stored at the same index of the first operand-array is greater-equal to the number stored at the same index of the second operand-array, and the value \texttt{false} otherwise. 
+     \item The second operator-function stores at index \texttt{i} of the boolean array if the product of the numbers of the operand-arrays stored at the same index is greater-equal to zero or not.
+ \end{itemize}
+
+	Use function pointers to pass the comparator function into the function.
+
+	You can use the following code skeleton to implement your functions. It is mandatory to provide test to show that your code works.
+
+	\begin{lstlisting}[gobble=8]
+		#include <iostream>
+		#include <math.h>
+		
+		// TODO: Implement greaterEqual function
+		// TODO: Implement productNonNegative function
+		// TODO: Implement operation
+		
+		int main() {
+			int *array1 = { 75, 5, 7 };
+			int *array2 = { -1, 10, 7 };
+   
+            bool *result1 = {0, 0, 0};
+            operation(array1, array2, result1, greaterEqual);
+            bool *result2 = {0, 0, 0};
+            operation(array1, array2, result2, productNonNegative);
+                
+            for (int i = 0; i < 3; i++) {
+                std::cout << result1[i] << " ";
+            }
+            std::cout << "\n";
+
+            for (int i = 0; i < 3; i++) {
+                std::cout << result2[i] << " ";
+            }
+            std::cout << "\n";
+		}
+	
+	\end{lstlisting}
+	
+\end{aufgabe}
+
+\newpage
+
+\begin{aufgabe}[0]{Bonus: Theory of Programming Languages}
+This exercise won't be graded and thus won't get you any points, but you're recommended to solved it since the content of this exercise (i.e. the introductory part of the course: theory of programming languages) is relevant for the exam. So, use this exercise as an opportunity to check if you've understood the concepts of the introductory part and as an opportunity to let your answers be corrected by the tutors.
+
+\begin{teilaufgabe}
+    You've learned that type systems can be classified into three dimensions where each dimension can manifest itself in two forms.
+    \newline
+    \newline Provide for each form of each dimension an example where the type system has this form in this dimension and give a brief explanation why this is so. The programming languages you can use are C++, Java and Python.
+\end{teilaufgabe}
+
+\begin{teilaufgabe}
+    Consider the following pseudo code. What will be the output when this code is executed with both lexical scope and dynamic scope?
+    \begin{lstlisting}[gobble=8]
+        n = 100
+
+        def clam()
+            display "in clam, n="
+            display n
+            display newline
+
+        def squid(n)
+            display "in squid, n="
+            display n
+            display newline
+            clam()
+            n = 5
+
+        display "in main program, n="
+        display n
+        display newline
+        squid(1)
+        clam
+    \end{lstlisting}
+\end{teilaufgabe}
+
+\end{aufgabe}
+
+\end{document}
